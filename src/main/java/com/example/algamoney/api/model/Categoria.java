@@ -57,6 +57,10 @@ public class Categoria {
 		this.nome = nome;
 	}
 
+	public boolean isEmpty(String value) {
+		return value.isEmpty() ?  true : false;
+	}
+
 	
 	
 }
