@@ -46,9 +46,15 @@ public class CategoriaResource {
 		 return ResponseEntity.created(uri).body(categoriaSalva);		
 	}
 	
-//	@DeleteMapping("/{codigo}")
-//	public Categoria apagarPorCodigo(@PathVariable Long codigo) {
-//		return categoriaRepository.delete(codigo);
-//	}
+	@DeleteMapping("/{codigo}")
+	public ResponseEntity<?> apagarPorCodigo(@PathVariable Long codigo) {
+		Categoria categoria = categoriaRepository.findOne(codigo);
+		if(categoria != null) {
+			categoriaRepository.delete(categoria);
+			return ResponseEntity.ok().build();
+		}else {
+			return ResponseEntity.notFound().build();
+		} 
+	}
 	
 }
