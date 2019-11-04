@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.example.algamoney.api.event.RecursoCriadoEvent;
@@ -50,14 +51,9 @@ public class CategoriaResource {
 	}
 	
 	@DeleteMapping("/{codigo}")
-	public ResponseEntity<?> apagarPorCodigo(@PathVariable Long codigo) {
-		Categoria categoria = categoriaRepository.findOne(codigo);
-		if(categoria != null) {
-			categoriaRepository.delete(categoria);
-			return ResponseEntity.ok().build();
-		}else {
-			return ResponseEntity.notFound().build();
-		} 
+	@ResponseStatus(HttpStatus.NO_CONTENT)
+	public void apagar(@PathVariable Long codigo){
+		categoriaRepository.delete(codigo);
 	}
 	
 }
