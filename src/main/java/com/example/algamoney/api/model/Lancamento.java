@@ -16,7 +16,7 @@ import javax.persistence.Table;
 
 @Entity
 @Table(name = "lancamento")
-public class Lançamento {
+public class Lancamento {
 	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -132,7 +132,7 @@ public class Lançamento {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		Lançamento other = (Lançamento) obj;
+		Lancamento other = (Lancamento) obj;
 		if (codigo == null) {
 			if (other.codigo != null)
 				return false;
