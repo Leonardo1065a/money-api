@@ -16,10 +16,10 @@ import org.springframework.data.domain.PageImpl;
 import org.springframework.data.domain.Pageable;
 import org.springframework.util.StringUtils;
 
-import com.example.algamoney.api.model.Categoria_;
+import com.example.algamoney.api.model.Categoria1;
 import com.example.algamoney.api.model.Lancamento;
-import com.example.algamoney.api.model.Lancamento_;
-import com.example.algamoney.api.model.Pessoa_;
+import com.example.algamoney.api.model.Lancamento1;
+import com.example.algamoney.api.model.Pessoa1;
 import com.example.algamoney.api.repository.filter.LancamentoFilter;
 import com.example.algamoney.api.repository.projection.ResumoLancamento;
 
@@ -51,11 +51,11 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery{
 		Root<Lancamento> root = criteria.from(Lancamento.class);
 
 		criteria.select(builder.construct(ResumoLancamento.class
-				, root.get(Lancamento_.codigo), root.get(Lancamento_.descricao)
-				, root.get(Lancamento_.dataVencimento), root.get(Lancamento_.dataPagamento)
-				, root.get(Lancamento_.valor), root.get(Lancamento_.tipo)
-				, root.get(Lancamento_.categoria).get(Categoria_.nome)
-				, root.get(Lancamento_.pessoa).get(Pessoa_.nome)));
+				, root.get(Lancamento1.codigo), root.get(Lancamento1.descricao)
+				, root.get(Lancamento1.dataVencimento), root.get(Lancamento1.dataPagamento)
+				, root.get(Lancamento1.valor), root.get(Lancamento1.tipo)
+				, root.get(Lancamento1.categoria).get(Categoria1.nome)
+				, root.get(Lancamento1.pessoa).get(Pessoa1.nome)));
 
 		Predicate[] predicates = criarRestricoes(lancamentoFilter, builder, root);
 		criteria.where(predicates);
@@ -74,17 +74,17 @@ public class LancamentoRepositoryImpl implements LancamentoRepositoryQuery{
 
 		if(!StringUtils.isEmpty(lancamentoFilter.getDescricao())) {
 			predicates.add(builder.like(
-					builder.lower(root.get(Lancamento_.descricao)), "%" + lancamentoFilter.getDescricao().toLowerCase() + "%"));
+					builder.lower(root.get(Lancamento1.descricao)), "%" + lancamentoFilter.getDescricao().toLowerCase() + "%"));
 		}
 
 		if(lancamentoFilter.getDataVencimentoDe() != null) {
 			predicates.add(
-					builder.greaterThanOrEqualTo(root.get(Lancamento_.dataVencimento), lancamentoFilter.getDataVencimentoDe()));
+					builder.greaterThanOrEqualTo(root.get(Lancamento1.dataVencimento), lancamentoFilter.getDataVencimentoDe()));
 		}
 
 		if(lancamentoFilter.getDataVencimentoAte() != null) {
 			predicates.add( 
-					builder.lessThanOrEqualTo(root.get(Lancamento_.dataVencimento), lancamentoFilter.getDataVencimentoAte()));
+					builder.lessThanOrEqualTo(root.get(Lancamento1.dataVencimento), lancamentoFilter.getDataVencimentoAte()));
 		}
 
 		return predicates.toArray(new Predicate[predicates.size()]);
