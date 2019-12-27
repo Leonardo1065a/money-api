@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 import com.example.algamoney.api.config.property.AlgamoneyApiProperty;
 
 @RestController
-@RequestMapping("tokens")
+@RequestMapping("/tokens")
 public class TokenResource {
 	
 	@Autowired
@@ -25,6 +25,7 @@ public class TokenResource {
 		cookie.setHttpOnly(true);
 		cookie.setSecure(algamoneyApiProperty.getSeguranca().isEnableHttps());
 		cookie.setPath(req.getContextPath() + "/oauth/token");
+		cookie.setMaxAge(0);
 		
 		resp.addCookie(cookie);
 		resp.setStatus(HttpStatus.NO_CONTENT.value());
