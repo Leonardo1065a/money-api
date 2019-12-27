@@ -31,7 +31,6 @@ public class AppUserDetailsService implements UserDetailsService{
 	}
 
 	private Collection<? extends GrantedAuthority> getPermissoes(Usuario usuario) {
-		// TODO Auto-generated method stub
 		Set<SimpleGrantedAuthority> authorities = new HashSet<>();
 		usuario.getPermissoes().forEach(p -> authorities.add(new SimpleGrantedAuthority(p.getDescricao().toUpperCase())) );
 		return authorities;
